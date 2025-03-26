@@ -1,18 +1,13 @@
 import { useState } from "react";
 import {
-	DeleteOutlined,
-	DownloadOutlined,
-	LoadingOutlined,
 	InboxOutlined,
 	HeartOutlined,
 	RocketOutlined,
-	CheckCircleOutlined,
 } from "@ant-design/icons";
 import {
 	Button,
 	Upload as AntUpload,
 	message,
-	Spin,
 	Typography,
 	Card,
 	Space,
@@ -24,7 +19,6 @@ import {
 import "./styles.css";
 
 const { Title, Text } = Typography;
-const { Dragger } = AntUpload;
 
 function App() {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
