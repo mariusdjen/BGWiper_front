@@ -1,7 +1,8 @@
 export const API_CONFIG = {
-	BASE_URL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000",
+	BASE_URL:
+		import.meta.env.VITE_API_BASE_URL || "https://bgwiper.dommacademy.com",
 	ENDPOINTS: {
-		REMOVE_BG: "/api/remove-bg",
+		REMOVE_BG: "/remove-bg",
 	},
 } as const;
 

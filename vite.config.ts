@@ -16,9 +16,10 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "http://localhost:3000",
+				target: "https://bgwiper.dommacademy.com",
 				changeOrigin: true,
-				secure: false,
+				secure: true,
+				rewrite: (path) => path.replace(/^\/api/, ""),
 			},
 		},
 	},
