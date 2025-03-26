@@ -128,6 +128,7 @@ function App() {
 			}}
 		>
 			<div
+				className="main-container"
 				style={{
 					minHeight: "100vh",
 					width: "100%",
@@ -141,26 +142,19 @@ function App() {
 					overflow: "hidden",
 					flexDirection: "row",
 					flexWrap: "wrap",
-					"@media (max-width: 768px)": {
-						flexDirection: "column",
-						padding: "0.5rem",
-						gap: "1rem",
-					},
 				}}
 			>
 				<div
+					className="card-container"
 					style={{
 						width: "100%",
 						maxWidth: "42rem",
 						flexShrink: 0,
-						"@media (max-width: 768px)": {
-							maxWidth: "100%",
-							padding: "0 0.5rem",
-						},
 					}}
 				>
 					{!preview && !processedImage ? (
 						<Card
+							className="card"
 							style={{
 								aspectRatio: "1",
 								background: "rgba(24, 24, 27, 0.8)",
@@ -172,15 +166,6 @@ function App() {
 								justifyContent: "center",
 								boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
 								transition: "all 0.3s ease",
-								":hover": {
-									transform: "scale(1.02)",
-									boxShadow: "0 12px 48px rgba(0, 0, 0, 0.4)",
-								},
-								"@media (max-width: 768px)": {
-									borderRadius: "1rem",
-									margin: "0 auto",
-									maxWidth: "100%",
-								},
 							}}
 						>
 							<div style={{ textAlign: "center", width: "100%" }}>
@@ -302,7 +287,7 @@ function App() {
 								}}
 							>
 								<img
-									src={processedImage || preview}
+									src={processedImage || preview || undefined}
 									alt={processedImage ? "Image traitée" : "Preview"}
 									style={{
 										width: "100%",
@@ -439,6 +424,7 @@ function App() {
 
 				{/* Section Dédicace */}
 				<Card
+					className="dedication-card"
 					style={{
 						width: "300px",
 						flexShrink: 0,
@@ -448,15 +434,6 @@ function App() {
 						borderRadius: "2rem",
 						boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
 						transition: "all 0.3s ease",
-						":hover": {
-							transform: "scale(1.02)",
-							boxShadow: "0 12px 48px rgba(0, 0, 0, 0.4)",
-						},
-						"@media (max-width: 768px)": {
-							width: "100%",
-							borderRadius: "1rem",
-							marginTop: "1rem",
-						},
 					}}
 				>
 					<div style={{ textAlign: "center" }}>
