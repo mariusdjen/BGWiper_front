@@ -225,12 +225,12 @@ function App() {
 						)}
 
 						<a
-							href="https://www.linkedin.com/in/marius-djen/"
+							href="https://www.marius-djenontin.com"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="dedication-link"
 						>
-							Fait avec ❤️ par Marius Djen
+							Fait avec ❤️ par MariusDev
 						</a>
 					</div>
 				</div>
