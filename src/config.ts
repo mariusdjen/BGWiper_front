@@ -1,4 +1,8 @@
+const isDevelopment = import.meta.env.DEV;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const API_CONFIG = {
+	BASE_URL: isDevelopment 
 	BASE_URL:
 		import.meta.env.VITE_API_BASE_URL || "https://bgwiper.dommacademy.com",
 	ENDPOINTS: {
