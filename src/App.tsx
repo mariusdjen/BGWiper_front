@@ -71,6 +71,7 @@ function App() {
 				headers: {
 					Accept: "application/json",
 				},
+				mode: "cors",
 			});
 
 			console.log("Statut de la réponse:", response.status);
