@@ -1,97 +1,83 @@
-# 🖼️ BG Wiper
+# 🎨 BG Wiper - Supprimez le fond de vos images gratuitement
 
 <div align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Ant%20Design-0170FE?style=for-the-badge&logo=ant-design&logoColor=white" alt="Ant Design" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-</div>
-
-<div align="center">
-  <h3>Supprimez le fond de vos images en quelques clics</h3>
+  <img src="public/logo.png" alt="BG Wiper Logo" width="200"/>
   <p>
-    <a href="#fonctionnalités">Fonctionnalités</a> •
-    <a href="#installation">Installation</a> •
-    <a href="#utilisation">Utilisation</a>
+    <strong>Un outil gratuit et puissant pour supprimer le fond de vos images en haute qualité</strong>
   </p>
 </div>
 
-## ✨ Fonctionnalités
+## ✨ Caractéristiques
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">🎨 Interface moderne</td>
-      <td align="center">⚡ Performance optimale</td>
-      <td align="center">📱 Responsive design</td>
-    </tr>
-    <tr>
-      <td align="center">🖼️ Suppression du fond</td>
-      <td align="center">📤 Export rapide</td>
-      <td align="center">🎯 Précision maximale</td>
-    </tr>
-  </table>
-</div>
+- 🆓 **100% Gratuit** - Aucun coût caché, aucune limitation
+- 🎯 **Qualité HD** - Conservation de la résolution d'origine
+- ⚡ **Rapide** - Traitement en quelques secondes
+- 🎨 **Précis** - Détection avancée des contours
+- 📱 **Responsive** - Interface adaptée à tous les appareils
+- 🔒 **Sécurisé** - Vos images ne sont jamais stockées
 
-## 🚀 Installation
+## 🚀 Pourquoi choisir BG Wiper ?
 
-```bash
-# Cloner le projet
-git clone [URL_DU_REPO]
-cd bgwiper
+Contrairement aux autres outils qui :
 
-# Installer les dépendances
-npm install
+- Deviennent payants pour la haute qualité
+- Limitent la résolution des images
+- Ajoutent des filigranes
+- Stockent vos données
 
-# Lancer l'application
-npm run dev
-```
+**BG Wiper** s'engage à :
+
+- Rester totalement gratuit
+- Préserver la qualité HD de vos images
+- Ne jamais ajouter de filigrane
+- Supprimer vos images après traitement
 
 ## 🛠️ Technologies utilisées
 
-<div align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Ant%20Design-0170FE?style=flat-square&logo=ant-design&logoColor=white" alt="Ant Design" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
-  <img src="https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind" />
-</div>
+- React
+- TypeScript
+- Vite
+- Ant Design
+- API personnalisée pour la suppression d'arrière-plan
 
-## 📱 Utilisation
+## 🔄 Améliorations en cours
 
-1. **Sélectionnez votre image**
+Nous travaillons activement sur l'amélioration de notre API pour :
 
-   - Glissez-déposez ou cliquez pour choisir
-   - Formats supportés : JPEG, PNG
-   - Taille maximale : 5 Mo
+- Augmenter la précision de la détection des contours
+- Optimiser le traitement des images complexes
+- Réduire le temps de traitement
+- Ajouter de nouvelles fonctionnalités
 
-2. **Traitement**
+## 🎯 Comment utiliser BG Wiper ?
 
-   - Cliquez sur "Supprimer le fond"
-   - Attendez le traitement
-   - Visualisez le résultat
+1. Glissez-déposez votre image ou cliquez pour la sélectionner
+2. Cliquez sur "Supprimer le fond"
+3. Téléchargez votre image sans fond
 
-3. **Export**
-   - Téléchargez votre image
-   - Format PNG avec fond transparent
+## 📝 Formats supportés
+
+- JPEG
+- PNG
+- Taille maximale : 5 Mo
 
 ## 🤝 Contribution
 
 Les contributions sont les bienvenues ! N'hésitez pas à :
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commiter vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Pousser vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+- Signaler des bugs
+- Proposer des améliorations
+- Soumettre des pull requests
 
-## 📄 Licence
+## 📜 Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de
+détails.
 
----
+## 👨‍💻 Créé avec ❤️ par [Marius Dev](https://www.marius-djenontin.com/)
 
 <div align="center">
-  <h3>Créé avec ❤️ par <a href="https://www.marius-djenontin.com/" target="_blank">Marius Dev</a></h3>
-  <p>Développé en 5 minutes ⚡</p>
+  <p>
+    <strong>Développé en 5 minutes ⚡</strong>
+  </p>
 </div>
