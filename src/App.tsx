@@ -64,6 +64,7 @@ function App() {
 		formData.append("image", selectedFile);
 
 		try {
+			console.log("Envoi de la requête à l'API...");
 			const response = await fetch("/api/remove-bg", {
 				method: "POST",
 				body: formData,
@@ -72,12 +73,16 @@ function App() {
 				},
 			});
 
+			console.log("Statut de la réponse:", response.status);
+
 			if (!response.ok) {
 				const errorData = await response.json().catch(() => null);
+				console.error("Erreur de l'API:", errorData);
 				throw new Error(errorData?.error || `Erreur HTTP: ${response.status}`);
 			}
 
 			const data = await response.json();
+			console.log("Réponse reçue:", data);
 
 			if (!data.no_bg_image_url) {
 				throw new Error("L'URL de l'image traitée n'a pas été reçue");
