@@ -1,27 +1,15 @@
 import { useState, useEffect } from "react";
-import {
-	InboxOutlined,
-	HeartOutlined,
-	RocketOutlined,
-	LoadingOutlined,
-	CheckCircleOutlined,
-} from "@ant-design/icons";
+import { InboxOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import {
 	Button,
 	Upload as AntUpload,
 	message,
-	Typography,
-	Card,
-	Space,
 	ConfigProvider,
 	theme,
-	Divider,
 	Alert,
 	Progress,
 } from "antd";
 import "./styles.css";
-
-const { Title, Text } = Typography;
 
 function App() {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -33,7 +21,7 @@ function App() {
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
-		let interval: NodeJS.Timeout;
+		let interval: ReturnType<typeof setInterval>;
 		if (isLoading) {
 			interval = setInterval(() => {
 				setProgress((prevProgress) => {
