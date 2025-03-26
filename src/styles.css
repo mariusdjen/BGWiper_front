@@ -1,3 +1,238 @@
+/* Styles de base */
+.main-container {
+	min-height: 100vh;
+	width: 100%;
+	background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.card-container {
+	width: 100%;
+	max-width: 100%;
+	flex-shrink: 0;
+}
+
+.content-container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+}
+
+.title {
+	font-size: 3rem;
+	margin-bottom: 2rem;
+	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: fadeInDown 0.8s ease;
+}
+
+.upload-area {
+	width: 100%;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 2px dashed #3b82f6;
+	border-radius: 16px;
+	background-color: rgba(59, 130, 246, 0.1);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	animation: fadeInUp 0.8s ease;
+}
+
+.upload-area:hover {
+	border-color: #2563eb;
+	background-color: rgba(59, 130, 246, 0.2);
+	transform: translateY(-2px);
+}
+
+.upload-icon {
+	font-size: 48px;
+	color: #3b82f6;
+	margin-bottom: 16px;
+	animation: bounce 2s infinite;
+}
+
+.upload-text {
+	font-size: 18px;
+	color: #e5e7eb;
+	margin-bottom: 8px;
+	font-weight: 500;
+}
+
+.upload-hint {
+	font-size: 14px;
+	color: #9ca3af;
+}
+
+.preview-container {
+	width: 100%;
+	max-width: 500px;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	animation: fadeIn 0.5s ease;
+}
+
+.preview-image {
+	width: 100%;
+	height: 300px;
+	object-fit: contain;
+	border-radius: 16px;
+	background-color: rgba(59, 130, 246, 0.1);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+	transform: scale(1.02);
+}
+
+.remove-button,
+.download-button,
+.delete-button {
+	height: 48px;
+	font-size: 16px;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+}
+
+.remove-button:hover,
+.download-button:hover,
+.delete-button:hover {
+	transform: translateY(-2px);
+}
+
+.remove-button {
+	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+	border: none;
+	margin-top: 16px;
+}
+
+.download-button {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	border: none;
+	margin-top: 16px;
+}
+
+.delete-button {
+	background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	border: none;
+	margin-top: 16px;
+}
+
+.dedication-link {
+	color: #3b82f6;
+	text-decoration: none;
+	margin-top: 20px;
+	display: inline-block;
+	transition: all 0.3s ease;
+}
+
+.dedication-link:hover {
+	color: #2563eb;
+	transform: translateY(-2px);
+}
+
+.progress-container {
+	width: 100%;
+	max-width: 500px;
+	margin: 20px auto;
+	animation: fadeIn 0.5s ease;
+}
+
+.loading-text {
+	margin-top: 8px;
+	color: #9ca3af;
+}
+
+.success-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	color: #10b981;
+	font-size: 16px;
+	margin-top: 16px;
+	animation: fadeIn 0.5s ease;
+}
+
+.quality-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	color: #10b981;
+	font-size: 16px;
+	margin-top: 16px;
+	animation: fadeIn 0.5s ease;
+}
+
+.quality-icon {
+	color: #10b981;
+	font-size: 20px;
+	margin-left: 8px;
+}
+
+.dedication-card {
+	width: 300px;
+	flex-shrink: 0;
+	background: rgba(24, 24, 27, 0.8);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(39, 39, 42, 0.5);
+	border-radius: 2rem;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+	animation: fadeInRight 0.8s ease;
+}
+
+.dedication-content {
+	text-align: center;
+}
+
+.dedication-icon {
+	font-size: 2rem;
+	color: #3b82f6;
+	animation: pulse 2s infinite;
+}
+
+.dedication-title {
+	color: white;
+	margin-top: 1rem;
+}
+
+.dedication-text {
+	color: #a1a1aa;
+}
+
+.dedication-divider {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.rocket-icon {
+	font-size: 1.5rem;
+	color: #3b82f6;
+	animation: float 3s infinite;
+}
+
+.error-alert {
+	margin-top: 20px;
+	animation: fadeIn 0.5s ease;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
 	.main-container {
@@ -86,4 +321,123 @@
 .dedication-link:hover {
 	color: #2563eb;
 	text-decoration: underline;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInRight {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+}
+
+/* Ajout des styles pour les transitions */
+.ant-upload-dragger {
+	transition: all 0.3s ease !important;
+}
+
+.ant-upload-dragger:hover {
+	transform: translateY(-2px);
+}
+
+.ant-btn {
+	transition: all 0.3s ease !important;
+}
+
+.ant-btn:hover {
+	transform: translateY(-2px);
+}
+
+/* Optimisation des performances */
+.main-container {
+	will-change: transform;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+}
+
+.preview-image {
+	will-change: transform;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+}
+
+/* Amélioration de l'accessibilité */
+.ant-upload-dragger:focus,
+.ant-btn:focus {
+	outline: 2px solid #3b82f6;
+	outline-offset: 2px;
+}
+
+/* Support du mode sombre */
+@media (prefers-color-scheme: dark) {
+	.ant-upload-dragger {
+		background-color: rgba(59, 130, 246, 0.1);
+		border-color: #3b82f6;
+	}
 }

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
 	InboxOutlined,
 	HeartOutlined,
 	RocketOutlined,
+	LoadingOutlined,
+	CheckCircleOutlined,
 } from "@ant-design/icons";
 import {
 	Button,
@@ -15,6 +17,7 @@ import {
 	theme,
 	Divider,
 	Alert,
+	Progress,
 } from "antd";
 import "./styles.css";
 
@@ -27,6 +30,25 @@ function App() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isUploading, setIsUploading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [progress, setProgress] = useState(0);
+
+	useEffect(() => {
+		let interval: NodeJS.Timeout;
+		if (isLoading) {
+			interval = setInterval(() => {
+				setProgress((prevProgress) => {
+					if (prevProgress >= 100) {
+						clearInterval(interval);
+						return 100;
+					}
+					return prevProgress + 1;
+				});
+			}, 100);
+		} else {
+			setProgress(0);
+		}
+		return () => clearInterval(interval);
+	}, [isLoading]);
 
 	const handleFileSelect = async (file: File) => {
 		if (file.size > 5 * 1024 * 1024) {
@@ -66,7 +88,6 @@ function App() {
 				headers: {
 					Accept: "application/json",
 				},
-				mode: "cors",
 			});
 
 			console.log("Statut de la réponse:", response.status);
@@ -122,87 +143,6 @@ function App() {
 		disabled: isUploading,
 	};
 
-	const styles = {
-		container: {
-			maxWidth: "800px",
-			margin: "0 auto",
-			padding: "20px",
-			textAlign: "center" as const,
-		},
-		title: {
-			fontSize: "2.5rem",
-			marginBottom: "2rem",
-			color: "#1890ff",
-		},
-		uploadArea: {
-			width: "100%",
-			height: "300px",
-			display: "flex",
-			flexDirection: "column" as const,
-			justifyContent: "center",
-			alignItems: "center",
-			border: "2px dashed #d9d9d9",
-			borderRadius: "8px",
-			backgroundColor: "#fafafa",
-			cursor: "pointer",
-			transition: "all 0.3s",
-		},
-		uploadIcon: {
-			fontSize: "48px",
-			color: "#1890ff",
-			marginBottom: "16px",
-		},
-		uploadText: {
-			fontSize: "16px",
-			color: "#666",
-			marginBottom: "8px",
-		},
-		uploadHint: {
-			fontSize: "14px",
-			color: "#999",
-		},
-		previewContainer: {
-			width: "100%",
-			maxWidth: "500px",
-			margin: "20px auto",
-			display: "flex",
-			flexDirection: "column" as const,
-			alignItems: "center",
-			gap: "16px",
-		},
-		previewImage: {
-			width: "100%",
-			height: "300px",
-			objectFit: "contain" as const,
-			borderRadius: "8px",
-			backgroundColor: "#fafafa",
-		},
-		removeButton: {
-			marginTop: "16px",
-		},
-		downloadButton: {
-			marginTop: "16px",
-		},
-		deleteButton: {
-			marginTop: "16px",
-			backgroundColor: "#ff4d4f",
-			borderColor: "#ff4d4f",
-		},
-		deleteButtonHover: {
-			backgroundColor: "#ff7875",
-			borderColor: "#ff7875",
-		},
-		dedicationLink: {
-			color: "#1890ff",
-			textDecoration: "none",
-			marginTop: "20px",
-			display: "inline-block",
-		},
-		dedicationLinkHover: {
-			color: "#40a9ff",
-		},
-	};
-
 	return (
 		<ConfigProvider
 			theme={{
@@ -213,40 +153,21 @@ function App() {
 				},
 			}}
 		>
-			<div
-				className="main-container"
-				style={{
-					minHeight: "100vh",
-					width: "100%",
-					background: "linear-gradient(135deg, #000000 0%, #1a1a1a 100%)",
-					padding: "1rem",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					gap: "2rem",
-					boxSizing: "border-box",
-					overflow: "hidden",
-					flexDirection: "row",
-					flexWrap: "wrap",
-				}}
-			>
-				<div
-					className="card-container"
-					style={{
-						width: "100%",
-						maxWidth: "42rem",
-						flexShrink: 0,
-					}}
-				>
-					<div style={styles.container}>
-						<h1 style={styles.title}>BG Wiper</h1>
-						<AntUpload.Dragger {...uploadProps} style={styles.uploadArea}>
-							<InboxOutlined style={styles.uploadIcon} />
-							<p style={styles.uploadText}>
+			<div className="main-container">
+				<div className="card-container">
+					<div className="content-container">
+						<h1 className="title">BG Wiper</h1>
+						<AntUpload.Dragger {...uploadProps} className="upload-area">
+							<InboxOutlined className="upload-icon" />
+							<p className="upload-text">
 								Cliquez ou glissez-déposez une image ici
 							</p>
-							<p style={styles.uploadHint}>
+							<p className="upload-hint">
 								Supporte les formats JPEG et PNG jusqu'à 5 Mo
+							</p>
+							<p className="quality-message">
+								Qualité de l'image conservée à 100%
+								<CheckCircleOutlined className="quality-icon" />
 							</p>
 						</AntUpload.Dragger>
 
@@ -256,18 +177,32 @@ function App() {
 								description={error}
 								type="error"
 								showIcon
-								style={{ marginTop: "20px" }}
+								className="error-alert"
 							/>
 						)}
 
+						{isLoading && (
+							<div className="progress-container">
+								<Progress
+									percent={progress}
+									status="active"
+									strokeColor={{
+										from: "#3b82f6",
+										to: "#2563eb",
+									}}
+								/>
+								<div className="loading-text">Traitement en cours...</div>
+							</div>
+						)}
+
 						{preview && (
-							<div style={styles.previewContainer}>
-								<img src={preview} alt="Aperçu" style={styles.previewImage} />
+							<div className="preview-container">
+								<img src={preview} alt="Aperçu" className="preview-image" />
 								<Button
 									type="primary"
 									onClick={handleRemoveBackground}
 									loading={isLoading}
-									style={styles.removeButton}
+									className="remove-button"
 								>
 									Supprimer le fond
 								</Button>
@@ -275,24 +210,27 @@ function App() {
 						)}
 
 						{processedImage && (
-							<div style={styles.previewContainer}>
+							<div className="preview-container">
 								<img
 									src={processedImage}
 									alt="Image traitée"
-									style={styles.previewImage}
+									className="preview-image"
 								/>
+								<div className="success-message">
+									<CheckCircleOutlined /> Fond supprimé avec succès !
+								</div>
+								<div className="quality-message">
+									Qualité de l'image conservée à 100%
+									<CheckCircleOutlined className="quality-icon" />
+								</div>
 								<Button
 									type="primary"
 									onClick={handleDownload}
-									style={styles.downloadButton}
+									className="download-button"
 								>
 									Télécharger
 								</Button>
-								<Button
-									danger
-									onClick={handleDelete}
-									style={styles.deleteButton}
-								>
+								<Button danger onClick={handleDelete} className="delete-button">
 									Supprimer
 								</Button>
 							</div>
@@ -302,76 +240,12 @@ function App() {
 							href="https://www.linkedin.com/in/marius-djen/"
 							target="_blank"
 							rel="noopener noreferrer"
-							style={styles.dedicationLink}
+							className="dedication-link"
 						>
 							Fait avec ❤️ par Marius Djen
 						</a>
 					</div>
 				</div>
-
-				{/* Section Dédicace */}
-				<Card
-					className="dedication-card"
-					style={{
-						width: "300px",
-						flexShrink: 0,
-						background: "rgba(24, 24, 27, 0.8)",
-						backdropFilter: "blur(10px)",
-						border: "1px solid rgba(39, 39, 42, 0.5)",
-						borderRadius: "2rem",
-						boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-						transition: "all 0.3s ease",
-					}}
-				>
-					<div style={{ textAlign: "center" }}>
-						<HeartOutlined
-							style={{
-								fontSize: "2rem",
-								color: "#3b82f6",
-							}}
-						/>
-						<Title
-							level={3}
-							style={{
-								color: "white",
-								marginTop: "1rem",
-							}}
-						>
-							Crée avec ❤️
-						</Title>
-						<Text
-							style={{
-								color: "#a1a1aa",
-							}}
-						>
-							par{" "}
-							<a
-								className="dedication-link"
-								href="https://www.marius-djenontin.com/"
-								target="_blank"
-								rel="noopener noreferrer"
-								style={{
-									color: "#3b82f6",
-									textDecoration: "none",
-									fontWeight: "bold",
-									transition: "all 0.3s ease",
-								}}
-							>
-								Marius Dev
-							</a>
-						</Text>
-						<Divider style={{ background: "rgba(255, 255, 255, 0.1)" }} />
-						<Space direction="vertical" size="small">
-							<RocketOutlined
-								style={{
-									fontSize: "1.5rem",
-									color: "#3b82f6",
-								}}
-							/>
-							<Text>Développé en 5 minutes ⚡</Text>
-						</Space>
-					</div>
-				</Card>
 			</div>
 		</ConfigProvider>
 	);
