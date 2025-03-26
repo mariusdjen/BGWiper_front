@@ -4,7 +4,6 @@ import {
 	DownloadOutlined,
 	LoadingOutlined,
 	InboxOutlined,
-	ReloadOutlined,
 	HeartOutlined,
 	RocketOutlined,
 	CheckCircleOutlined,
@@ -21,7 +20,6 @@ import {
 	theme,
 	Divider,
 } from "antd";
-import type { UploadFile } from "antd/es/upload/interface";
 import "./styles.css";
 
 const { Title, Text } = Typography;
@@ -171,6 +169,7 @@ function App() {
 							<div style={{ textAlign: "center", width: "100%" }}>
 								<Title
 									level={1}
+									className="title"
 									style={{
 										color: "white",
 										marginBottom: "4rem",
@@ -181,10 +180,6 @@ function App() {
 											"linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
 										WebkitBackgroundClip: "text",
 										WebkitTextFillColor: "transparent",
-										"@media (max-width: 768px)": {
-											fontSize: "2.5rem",
-											marginBottom: "2rem",
-										},
 									}}
 								>
 									BG Wiper
@@ -192,40 +187,32 @@ function App() {
 								<Dragger {...uploadProps}>
 									<p className="ant-upload-drag-icon">
 										<InboxOutlined
+											className="upload-icon"
 											style={{
 												color: "#3b82f6",
 												fontSize: "3rem",
-												"@media (max-width: 768px)": {
-													fontSize: "2rem",
-												},
 											}}
 										/>
 									</p>
 									<p
-										className="ant-upload-text"
+										className="ant-upload-text upload-text"
 										style={{
 											color: "#a1a1aa",
 											fontSize: "1.25rem",
-											"@media (max-width: 768px)": {
-												fontSize: "1rem",
-											},
 										}}
 									>
 										Glissez-déposez votre image ici ou cliquez pour sélectionner
 									</p>
 									<p
-										className="ant-upload-hint"
+										className="ant-upload-hint upload-hint"
 										style={{
 											color: "#71717a",
-											"@media (max-width: 768px)": {
-												fontSize: "0.875rem",
-											},
 										}}
 									>
 										Formats acceptés : JPEG, PNG (max 5 Mo)
 									</p>
 									<p
-										className="ant-upload-hint"
+										className="ant-upload-hint upload-hint"
 										style={{
 											background:
 												"linear-gradient(135deg, #10b981 0%, #059669 100%)",
@@ -237,9 +224,6 @@ function App() {
 											alignItems: "center",
 											justifyContent: "center",
 											gap: "0.5rem",
-											"@media (max-width: 768px)": {
-												fontSize: "0.875rem",
-											},
 										}}
 									>
 										<CheckCircleOutlined
@@ -262,9 +246,6 @@ function App() {
 								display: "flex",
 								flexDirection: "column",
 								gap: "1.5rem",
-								"@media (max-width: 768px)": {
-									gap: "1rem",
-								},
 							}}
 						>
 							<Card
@@ -277,13 +258,6 @@ function App() {
 									position: "relative",
 									boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
 									transition: "all 0.3s ease",
-									":hover": {
-										transform: "scale(1.02)",
-										boxShadow: "0 12px 48px rgba(0, 0, 0, 0.4)",
-									},
-									"@media (max-width: 768px)": {
-										borderRadius: "1rem",
-									},
 								}}
 							>
 								<img
@@ -302,13 +276,10 @@ function App() {
 										right: "2rem",
 										display: "flex",
 										gap: "1rem",
-										"@media (max-width: 768px)": {
-											top: "1rem",
-											right: "1rem",
-										},
 									}}
 								>
 									<Button
+										className="delete-button"
 										icon={<DeleteOutlined />}
 										onClick={() => {
 											setSelectedFile(null);
@@ -321,12 +292,6 @@ function App() {
 											color: "white",
 											backdropFilter: "blur(4px)",
 											transition: "all 0.3s ease",
-											":hover": {
-												background: "rgba(239, 68, 68, 0.8)",
-											},
-											"@media (max-width: 768px)": {
-												padding: "0.5rem",
-											},
 										}}
 									>
 										Supprimer
@@ -341,9 +306,6 @@ function App() {
 										border: "1px solid rgba(153, 27, 27, 0.5)",
 										backdropFilter: "blur(4px)",
 										animation: "fadeIn 0.3s ease",
-										"@media (max-width: 768px)": {
-											borderRadius: "0.5rem",
-										},
 									}}
 								>
 									<Text style={{ color: "#fecaca" }}>{error}</Text>
@@ -369,14 +331,6 @@ function App() {
 												"linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
 											border: "none",
 											transition: "all 0.3s ease",
-											":hover": {
-												transform: "translateY(-2px)",
-												boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)",
-											},
-											"@media (max-width: 768px)": {
-												height: "3rem",
-												fontSize: "1rem",
-											},
 										}}
 									>
 										{isLoading ? (
@@ -392,6 +346,7 @@ function App() {
 								)}
 								{processedImage && (
 									<Button
+										className="download-button"
 										type="primary"
 										size="large"
 										block
@@ -404,14 +359,6 @@ function App() {
 												"linear-gradient(135deg, #10b981 0%, #059669 100%)",
 											border: "none",
 											transition: "all 0.3s ease",
-											":hover": {
-												transform: "translateY(-2px)",
-												boxShadow: "0 4px 12px rgba(16, 185, 129, 0.3)",
-											},
-											"@media (max-width: 768px)": {
-												height: "3rem",
-												fontSize: "1rem",
-											},
 										}}
 									>
 										Télécharger l'image
@@ -441,9 +388,6 @@ function App() {
 							style={{
 								fontSize: "2rem",
 								color: "#3b82f6",
-								"@media (max-width: 768px)": {
-									fontSize: "1.5rem",
-								},
 							}}
 						/>
 						<Title
@@ -451,9 +395,6 @@ function App() {
 							style={{
 								color: "white",
 								marginTop: "1rem",
-								"@media (max-width: 768px)": {
-									fontSize: "1.25rem",
-								},
 							}}
 						>
 							Crée avec ❤️
@@ -461,13 +402,11 @@ function App() {
 						<Text
 							style={{
 								color: "#a1a1aa",
-								"@media (max-width: 768px)": {
-									fontSize: "0.875rem",
-								},
 							}}
 						>
 							par{" "}
 							<a
+								className="dedication-link"
 								href="https://www.marius-djenontin.com/"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -476,10 +415,6 @@ function App() {
 									textDecoration: "none",
 									fontWeight: "bold",
 									transition: "all 0.3s ease",
-									":hover": {
-										color: "#2563eb",
-										textDecoration: "underline",
-									},
 								}}
 							>
 								Marius Dev
@@ -491,21 +426,9 @@ function App() {
 								style={{
 									fontSize: "1.5rem",
 									color: "#3b82f6",
-									"@media (max-width: 768px)": {
-										fontSize: "1.25rem",
-									},
 								}}
 							/>
-							<Text
-								style={{
-									color: "#a1a1aa",
-									"@media (max-width: 768px)": {
-										fontSize: "0.875rem",
-									},
-								}}
-							>
-								Développé en 5 minutes ⚡
-							</Text>
+							<Text>Développé en 5 minutes ⚡</Text>
 						</Space>
 					</div>
 				</Card>
