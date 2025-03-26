@@ -16,7 +16,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "https://bgwiper.dommacademy.com", 
+				target: "https://bgwiper.dommacademy.com",
 				changeOrigin: true,
 				secure: true,
 				rewrite: (path) => path.replace(/^\/api/, ""),
