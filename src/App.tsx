@@ -19,6 +19,7 @@ import {
 	ConfigProvider,
 	theme,
 	Divider,
+	Alert,
 } from "antd";
 import "./styles.css";
 
@@ -114,11 +115,98 @@ function App() {
 		document.body.removeChild(a);
 	};
 
+	const handleDelete = () => {
+		setSelectedFile(null);
+		setPreview(null);
+		setProcessedImage(null);
+	};
+
 	const uploadProps = {
 		beforeUpload: handleFileSelect,
 		showUploadList: false,
 		accept: "image/jpeg,image/png",
 		disabled: isUploading,
+	};
+
+	const styles = {
+		container: {
+			maxWidth: "800px",
+			margin: "0 auto",
+			padding: "20px",
+			textAlign: "center" as const,
+		},
+		title: {
+			fontSize: "2.5rem",
+			marginBottom: "2rem",
+			color: "#1890ff",
+		},
+		uploadArea: {
+			width: "100%",
+			height: "300px",
+			display: "flex",
+			flexDirection: "column" as const,
+			justifyContent: "center",
+			alignItems: "center",
+			border: "2px dashed #d9d9d9",
+			borderRadius: "8px",
+			backgroundColor: "#fafafa",
+			cursor: "pointer",
+			transition: "all 0.3s",
+		},
+		uploadIcon: {
+			fontSize: "48px",
+			color: "#1890ff",
+			marginBottom: "16px",
+		},
+		uploadText: {
+			fontSize: "16px",
+			color: "#666",
+			marginBottom: "8px",
+		},
+		uploadHint: {
+			fontSize: "14px",
+			color: "#999",
+		},
+		previewContainer: {
+			width: "100%",
+			maxWidth: "500px",
+			margin: "20px auto",
+			display: "flex",
+			flexDirection: "column" as const,
+			alignItems: "center",
+			gap: "16px",
+		},
+		previewImage: {
+			width: "100%",
+			height: "300px",
+			objectFit: "contain" as const,
+			borderRadius: "8px",
+			backgroundColor: "#fafafa",
+		},
+		removeButton: {
+			marginTop: "16px",
+		},
+		downloadButton: {
+			marginTop: "16px",
+		},
+		deleteButton: {
+			marginTop: "16px",
+			backgroundColor: "#ff4d4f",
+			borderColor: "#ff4d4f",
+		},
+		deleteButtonHover: {
+			backgroundColor: "#ff7875",
+			borderColor: "#ff7875",
+		},
+		dedicationLink: {
+			color: "#1890ff",
+			textDecoration: "none",
+			marginTop: "20px",
+			display: "inline-block",
+		},
+		dedicationLinkHover: {
+			color: "#40a9ff",
+		},
 	};
 
 	return (
@@ -156,223 +244,75 @@ function App() {
 						flexShrink: 0,
 					}}
 				>
-					{!preview && !processedImage ? (
-						<Card
-							className="card"
-							style={{
-								aspectRatio: "1",
-								background: "rgba(24, 24, 27, 0.8)",
-								backdropFilter: "blur(10px)",
-								border: "1px solid rgba(39, 39, 42, 0.5)",
-								borderRadius: "2rem",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-								transition: "all 0.3s ease",
-							}}
-						>
-							<div style={{ textAlign: "center", width: "100%" }}>
-								<Title
-									level={1}
-									className="title"
-									style={{
-										color: "white",
-										marginBottom: "4rem",
-										fontWeight: "bold",
-										fontSize: "4rem",
-										textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-										background:
-											"linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-										WebkitBackgroundClip: "text",
-										WebkitTextFillColor: "transparent",
-									}}
+					<div style={styles.container}>
+						<h1 style={styles.title}>BG Wiper</h1>
+						<AntUpload.Dragger {...uploadProps} style={styles.uploadArea}>
+							<InboxOutlined style={styles.uploadIcon} />
+							<p style={styles.uploadText}>
+								Cliquez ou glissez-déposez une image ici
+							</p>
+							<p style={styles.uploadHint}>
+								Supporte les formats JPEG et PNG jusqu'à 5 Mo
+							</p>
+						</AntUpload.Dragger>
+
+						{error && (
+							<Alert
+								message="Erreur"
+								description={error}
+								type="error"
+								showIcon
+								style={{ marginTop: "20px" }}
+							/>
+						)}
+
+						{preview && (
+							<div style={styles.previewContainer}>
+								<img src={preview} alt="Aperçu" style={styles.previewImage} />
+								<Button
+									type="primary"
+									onClick={handleRemoveBackground}
+									loading={isLoading}
+									style={styles.removeButton}
 								>
-									BG Wiper
-								</Title>
-								<Dragger {...uploadProps}>
-									<p className="ant-upload-drag-icon">
-										<InboxOutlined
-											className="upload-icon"
-											style={{
-												color: "#3b82f6",
-												fontSize: "3rem",
-											}}
-										/>
-									</p>
-									<p
-										className="ant-upload-text upload-text"
-										style={{
-											color: "#a1a1aa",
-											fontSize: "1.25rem",
-										}}
-									>
-										Glissez-déposez votre image ici ou cliquez pour sélectionner
-									</p>
-									<p
-										className="ant-upload-hint upload-hint"
-										style={{
-											color: "#71717a",
-										}}
-									>
-										Formats acceptés : JPEG, PNG (max 5 Mo)
-									</p>
-									<p
-										className="ant-upload-hint upload-hint"
-										style={{
-											background:
-												"linear-gradient(135deg, #10b981 0%, #059669 100%)",
-											WebkitBackgroundClip: "text",
-											WebkitTextFillColor: "transparent",
-											marginTop: "0.5rem",
-											fontWeight: "500",
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "center",
-											gap: "0.5rem",
-										}}
-									>
-										<CheckCircleOutlined
-											style={{
-												fontSize: "1.1rem",
-												background:
-													"linear-gradient(135deg, #10b981 0%, #059669 100%)",
-												WebkitBackgroundClip: "text",
-												WebkitTextFillColor: "transparent",
-											}}
-										/>
-										Qualité HD préservée • Résolution d'origine conservée
-									</p>
-								</Dragger>
+									Supprimer le fond
+								</Button>
 							</div>
-						</Card>
-					) : (
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								gap: "1.5rem",
-							}}
-						>
-							<Card
-								style={{
-									aspectRatio: "1",
-									background: "rgba(24, 24, 27, 0.8)",
-									backdropFilter: "blur(10px)",
-									border: "1px solid rgba(39, 39, 42, 0.5)",
-									borderRadius: "2rem",
-									position: "relative",
-									boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-									transition: "all 0.3s ease",
-								}}
-							>
+						)}
+
+						{processedImage && (
+							<div style={styles.previewContainer}>
 								<img
-									src={processedImage || preview || undefined}
-									alt={processedImage ? "Image traitée" : "Preview"}
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
+									src={processedImage}
+									alt="Image traitée"
+									style={styles.previewImage}
 								/>
-								<div
-									style={{
-										position: "absolute",
-										top: "2rem",
-										right: "2rem",
-										display: "flex",
-										gap: "1rem",
-									}}
+								<Button
+									type="primary"
+									onClick={handleDownload}
+									style={styles.downloadButton}
 								>
-									<Button
-										className="delete-button"
-										icon={<DeleteOutlined />}
-										onClick={() => {
-											setSelectedFile(null);
-											setPreview(null);
-											setProcessedImage(null);
-										}}
-										style={{
-											background: "rgba(39, 39, 42, 0.8)",
-											border: "none",
-											color: "white",
-											backdropFilter: "blur(4px)",
-											transition: "all 0.3s ease",
-										}}
-									>
-										Supprimer
-									</Button>
-								</div>
-							</Card>
-
-							{error && (
-								<Card
-									style={{
-										background: "rgba(127, 29, 29, 0.5)",
-										border: "1px solid rgba(153, 27, 27, 0.5)",
-										backdropFilter: "blur(4px)",
-										animation: "fadeIn 0.3s ease",
-									}}
+									Télécharger
+								</Button>
+								<Button
+									danger
+									onClick={handleDelete}
+									style={styles.deleteButton}
 								>
-									<Text style={{ color: "#fecaca" }}>{error}</Text>
-								</Card>
-							)}
+									Supprimer
+								</Button>
+							</div>
+						)}
 
-							<Space
-								direction="vertical"
-								style={{ width: "100%" }}
-								size="large"
-							>
-								{selectedFile && !processedImage && (
-									<Button
-										type="primary"
-										size="large"
-										block
-										onClick={handleRemoveBackground}
-										disabled={isLoading}
-										style={{
-											height: "3.5rem",
-											fontSize: "1.1rem",
-											background:
-												"linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-											border: "none",
-											transition: "all 0.3s ease",
-										}}
-									>
-										{isLoading ? (
-											<Spin
-												indicator={
-													<LoadingOutlined style={{ fontSize: 24 }} spin />
-												}
-											/>
-										) : (
-											"Supprimer le fond"
-										)}
-									</Button>
-								)}
-								{processedImage && (
-									<Button
-										className="download-button"
-										type="primary"
-										size="large"
-										block
-										onClick={handleDownload}
-										icon={<DownloadOutlined />}
-										style={{
-											height: "3.5rem",
-											fontSize: "1.1rem",
-											background:
-												"linear-gradient(135deg, #10b981 0%, #059669 100%)",
-											border: "none",
-											transition: "all 0.3s ease",
-										}}
-									>
-										Télécharger l'image
-									</Button>
-								)}
-							</Space>
-						</div>
-					)}
+						<a
+							href="https://www.linkedin.com/in/marius-djen/"
+							target="_blank"
+							rel="noopener noreferrer"
+							style={styles.dedicationLink}
+						>
+							Fait avec ❤️ par Marius Djen
+						</a>
+					</div>
 				</div>
 
 				{/* Section Dédicace */}
